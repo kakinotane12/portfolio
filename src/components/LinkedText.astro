@@ -1,0 +1,48 @@
+---
+/**
+ * 文中のリンクを有効にする部品。
+ * - [表示する文字](URL) と書くと、その文字がリンクになります
+ * - 裸の URL もそのままリンクになります
+ *
+ * 段落や改行は扱いません（行の中身だけを組み立てます）。
+ * 段落として使いたいときは RichText を使ってください。
+ */
+interface Props {
+  text: string;
+}
+
+const { text } = Astro.props;
+
+/** [ラベル](URL) 形式と、裸の URL の両方を切り出す */
+const PART_PATTERN = /(\[[^\]\n]+\]\(https?:\/\/[^\s)]+\)|https?:\/\/[^\s、。）」』】]+)/g;
+const LABELLED = /^\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)$/;
+const BARE_URL = /^https?:\/\//;
+---
+
+{
+  text.split(PART_PATTERN).map((part) => {
+    const labelled = part.match(LABELLED);
+    if (labelled) {
+      return (
+        <a class="link" href={labelled[2]} rel="noopener" target="_blank">
+          {labelled[1]}
+        </a>
+      );
+    }
+    if (BARE_URL.test(part)) {
+      return (
+        <a class="link linkedText__url" href={part} rel="noopener" target="_blank">
+          {part}
+        </a>
+      );
+    }
+    return part;
+  })
+}
+
+<style>
+  /* 長い URL をそのまま貼っても、はみ出さずに折り返す */
+  .linkedText__url {
+    word-break: break-all;
+  }
+</style>

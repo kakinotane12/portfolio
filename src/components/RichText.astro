@@ -2,9 +2,10 @@
 /**
  * 説明文の表示。
  * - 改行で段落に分けます
- * - 文中の URL を自動でリンクにします
- * - [表示する文字](URL) と書くと、好きな文字をリンクにできます
+ * - 各段落の中のリンクは LinkedText が処理します
  */
+import LinkedText from './LinkedText.astro';
+
 interface Props {
   text: string;
   class?: string;
@@ -13,43 +14,14 @@ interface Props {
 const { text, class: className } = Astro.props;
 
 const paragraphs = text.split('\n').filter((line) => line.trim());
-
-/** [ラベル](URL) 形式と、裸の URL の両方を切り出す */
-const PART_PATTERN = /(\[[^\]\n]+\]\(https?:\/\/[^\s)]+\)|https?:\/\/[^\s、。）」』】]+)/g;
-const LABELLED = /^\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)$/;
-const BARE_URL = /^https?:\/\//;
 ---
 
 <div class={className}>
   {
     paragraphs.map((paragraph) => (
       <p>
-        {paragraph.split(PART_PATTERN).map((part) => {
-          const labelled = part.match(LABELLED);
-          if (labelled) {
-            return (
-              <a class="link" href={labelled[2]} rel="noopener" target="_blank">
-                {labelled[1]}
-              </a>
-            );
-          }
-          if (BARE_URL.test(part)) {
-            return (
-              <a class="link richText__url" href={part} rel="noopener" target="_blank">
-                {part}
-              </a>
-            );
-          }
-          return part;
-        })}
+        <LinkedText text={paragraph} />
       </p>
     ))
   }
 </div>
-
-<style>
-  /* 長い URL をそのまま貼っても、はみ出さずに折り返す */
-  .richText__url {
-    word-break: break-all;
-  }
-</style>

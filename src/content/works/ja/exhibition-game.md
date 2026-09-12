@@ -2,7 +2,7 @@
 lang: ja
 key: exhibition-game
 title: "VR Clay Shooting"
-summary: "2週間で個人制作したVRクレー射撃ゲーム"
+summary: "2週間で個人開発したVRクレー射撃ゲーム"
 description: |
   VRヘッドセットで遊ぶクレー射撃ゲームです。右手のコントローラーのトリガーを引いて射撃し、1つのターゲットにつき1発まで撃つことができます。
 

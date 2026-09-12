@@ -38,7 +38,7 @@ export const awards: AwardEntry[] = [
       },
       {
         label: {
-          ja: '第31回日本バーチャルリアリティ学会でデモ展示',
+          ja: '第31回日本バーチャルリアリティ学会大会でデモ展示',
           en: 'Demo exhibition at the Virtual Reality Society of Japan',
         },
       },

@@ -8,6 +8,7 @@ import { skills } from '../data/skills';
 import Section from './Section.astro';
 import WorkCard from './WorkCard.astro';
 import WorkModal from './WorkModal.astro';
+import LinkedText from './LinkedText.astro';
 import ArrowIcon from './ArrowIcon.astro';
 
 interface Props {
@@ -48,7 +49,7 @@ const coverOf = (data: (typeof works)[number]['data']) =>
     <dl class="hero__meta">
       <div class="hero__metaItem">
         <dt>Affiliation</dt>
-        <dd>{profile.affiliation[lang]}</dd>
+        <dd><LinkedText text={profile.affiliation[lang]} /></dd>
       </div>
     </dl>
   </div>
@@ -57,7 +58,11 @@ const coverOf = (data: (typeof works)[number]['data']) =>
 {/* ============ About ============ */}
 <Section id="about" eyebrow={t('section.about')} title={t('section.about.lead')} prose>
   <div class="about reveal">
-    {profile.about[lang].map((paragraph) => <p>{paragraph}</p>)}
+    {profile.about[lang].map((paragraph) => (
+      <p>
+        <LinkedText text={paragraph} />
+      </p>
+    ))}
   </div>
 </Section>
 

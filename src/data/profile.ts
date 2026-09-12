@@ -27,8 +27,8 @@ export const profile = {
   },
 
   affiliation: {
-    ja: '慶應義塾大学 理工学研究科 人間・社会システム情報科学専攻 修士1年',
-    en: 'M1 Student, School of Informatics, Management, and Human Sciences, Graduate School of Science and Technology, Keio University',
+    ja: '慶應義塾大学 理工学研究科 人間・社会システム情報科学専攻 [杉本研究室](https://im-lab.net/) 修士1年',
+    en: 'M1 Student,Interactive Media Lab, School of Informatics, Management, and Human Sciences, Graduate School of Science and Technology, Keio University',
   },
 
   /** TODO: 公開してよい連絡用メールアドレスに差し替えてください */

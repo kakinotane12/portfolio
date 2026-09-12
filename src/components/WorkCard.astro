@@ -121,7 +121,7 @@ const href = localizePath(`/works/${workKey}`, lang);
     flex-wrap: wrap;
     align-items: center;
     gap: 0.75rem;
-    font-size: var(--text-xs);
+    font-size: var(--text-sm);
     line-height: 1.6;
     color: var(--text-faint);
   }
@@ -136,24 +136,30 @@ const href = localizePath(`/works/${workKey}`, lang);
     font-size: var(--text-lg);
   }
 
+  /* タイトル（20px）より一段だけ小さくする。差は色でつける */
   .card__summary {
     margin-top: 0.6rem;
-    font-size: var(--text-sm);
-    line-height: 1.85;
+    font-size: var(--text-base);
+    line-height: 1.7;
     color: var(--text-muted);
+    /* 最終行が短くなるのを避ける既定の調整（text-wrap: pretty）を打ち消し、
+       右端まで文字を詰める */
+    text-wrap: wrap;
   }
 
   /* summary と同じ体裁。強調は「表彰・活動」セクションが担う */
   .card__award {
     margin-top: 0.4rem;
-    font-size: var(--text-sm);
-    line-height: 1.85;
+    font-size: var(--text-base);
+    line-height: 1.7;
     color: var(--text-muted);
+    text-wrap: wrap;
   }
 
   .card__role {
     margin-top: var(--space-2);
-    font-size: var(--text-xs);
+    font-size: var(--text-sm);
+    line-height: 1.7;
     color: var(--text-muted);
   }
 
@@ -165,6 +171,11 @@ const href = localizePath(`/works/${workKey}`, lang);
 
   .card__tech {
     margin-top: var(--space-2);
+  }
+
+  /* タグは global.css の .tag を使っているので、カード内だけ上書きする */
+  .card__tech :global(.tag) {
+    font-size: var(--text-sm);
   }
 
   .card__cta {
