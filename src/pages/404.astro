@@ -1,0 +1,52 @@
+---
+import Base from '../layouts/Base.astro';
+import { localizePath } from '../i18n/config';
+import ArrowIcon from '../components/ArrowIcon.astro';
+
+const lang = 'ja' as const;
+---
+
+<Base lang={lang} path="/404" title="ページが見つかりません">
+  <section class="notfound">
+    <div class="container container--prose">
+      <p class="eyebrow">404</p>
+      <h1 class="notfound__title">ページが見つかりませんでした</h1>
+      <p class="notfound__text muted">
+        URL が変更されたか、削除された可能性があります。<br />
+        Page not found. The page may have been moved or removed.
+      </p>
+      <p class="notfound__actions">
+        <a class="link-arrow" href={localizePath('/', 'ja')}>
+          トップへ戻る
+          <ArrowIcon />
+        </a>
+        <a class="link-arrow" href={localizePath('/', 'en')}>
+          Back to home
+          <ArrowIcon />
+        </a>
+      </p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .notfound {
+    padding-block: clamp(5rem, 3rem + 10vw, 10rem);
+  }
+
+  .notfound__title {
+    margin-top: var(--space-1);
+    font-size: var(--text-2xl);
+  }
+
+  .notfound__text {
+    margin-top: var(--space-2);
+  }
+
+  .notfound__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+    margin-top: var(--space-6);
+  }
+</style>

@@ -1,0 +1,274 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { localizePath, type Lang } from '../i18n/config';
+import { useTranslations } from '../i18n/ui';
+import WorkBody from './WorkBody.astro';
+
+interface Props {
+  lang: Lang;
+  entry: CollectionEntry<'works'>;
+}
+
+const { lang, entry } = Astro.props;
+const t = useTranslations(lang);
+const key = entry.data.key;
+const titleId = `work-title-${key}`;
+---
+
+<dialog
+  class="modal"
+  data-work={key}
+  data-work-url={localizePath(`/works/${key}`, lang)}
+  aria-labelledby={titleId}
+>
+  <button class="modal__close" type="button" aria-label={t('modal.close')} data-modal-close>
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M6 6l12 12M18 6L6 18" />
+    </svg>
+  </button>
+
+  <div class="modal__scroll" tabindex="-1">
+    <div class="modal__inner">
+      <WorkBody lang={lang} entry={entry} titleId={titleId} level={2} />
+    </div>
+  </div>
+</dialog>
+
+<style>
+  .modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    width: min(54rem, calc(100vw - 2rem));
+    max-width: none;
+    max-height: min(88dvh, 56rem);
+    margin: auto;
+    padding: 0;
+    color: var(--text);
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 24px 64px rgba(16, 24, 40, 0.18);
+    overflow: hidden;
+
+    /* 閉じている状態の見た目。開くときにここから遷移する */
+    opacity: 0;
+    transform: translateY(10px) scale(0.99);
+    transition:
+      opacity 0.28s var(--ease),
+      transform 0.28s var(--ease),
+      overlay 0.28s var(--ease) allow-discrete,
+      display 0.28s var(--ease) allow-discrete;
+  }
+
+  .modal[open] {
+    display: flex;
+    flex-direction: column;
+    opacity: 1;
+    transform: none;
+  }
+
+  /* 開き始めの状態（対応ブラウザのみ。非対応でも即時表示されるだけ） */
+  @starting-style {
+    .modal[open] {
+      opacity: 0;
+      transform: translateY(10px) scale(0.99);
+    }
+  }
+
+  .modal::backdrop {
+    background: rgba(12, 14, 18, 0);
+    backdrop-filter: blur(0px);
+    transition:
+      background-color 0.28s var(--ease),
+      backdrop-filter 0.28s var(--ease),
+      overlay 0.28s var(--ease) allow-discrete,
+      display 0.28s var(--ease) allow-discrete;
+  }
+
+  .modal[open]::backdrop {
+    background: rgba(12, 14, 18, 0.45);
+    backdrop-filter: blur(3px);
+  }
+
+  @starting-style {
+    .modal[open]::backdrop {
+      background: rgba(12, 14, 18, 0);
+      backdrop-filter: blur(0px);
+    }
+  }
+
+  /* ---------- 中身 ---------- */
+  .modal__scroll {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    overscroll-behavior: contain; /* 端まで来ても背面がスクロールしないように */
+  }
+
+  .modal__scroll:focus {
+    outline: none;
+  }
+
+  .modal__inner {
+    padding: clamp(1.75rem, 1rem + 3vw, 3.5rem);
+    padding-top: clamp(3rem, 2rem + 3vw, 4rem);
+  }
+
+  /* ---------- 閉じるボタン ---------- */
+  .modal__close {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    z-index: 2;
+    display: grid;
+    place-items: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    color: var(--text-muted);
+    background: color-mix(in srgb, var(--bg) 75%, transparent);
+    backdrop-filter: blur(8px);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    transition:
+      color 0.15s var(--ease),
+      border-color 0.15s var(--ease),
+      transform 0.15s var(--ease);
+  }
+
+  .modal__close:hover {
+    color: var(--text);
+    border-color: var(--border-strong);
+    transform: rotate(90deg);
+  }
+
+  .modal__close svg {
+    width: 1.05rem;
+    height: 1.05rem;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.7;
+    stroke-linecap: round;
+  }
+
+  /* 画面が狭いときは全画面に近づける */
+  @media (max-width: 40rem) {
+    .modal {
+      width: 100vw;
+      max-width: 100vw;
+      max-height: 100dvh;
+      height: 100dvh;
+      border: 0;
+      border-radius: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .modal,
+    .modal::backdrop {
+      transition: none;
+    }
+    .modal__close:hover {
+      transform: none;
+    }
+  }
+</style>
+
+<script>
+  /**
+   * 作品モーダルの制御。
+   * - カードのクリックを乗っ取ってモーダルを開く（Ctrl+クリック等は通常遷移に任せる）
+   * - 開いたら URL を /works/<key>/ に差し替え、戻るボタンで閉じられるようにする
+   * - 閉じる操作はすべて history.back() に集約し、状態のズレを防ぐ
+   */
+  const dialogs = new Map<string, HTMLDialogElement>();
+  document.querySelectorAll<HTMLDialogElement>('dialog[data-work]').forEach((el) => {
+    if (el.dataset.work) dialogs.set(el.dataset.work, el);
+  });
+
+  if (dialogs.size > 0) {
+    const homeUrl = location.pathname + location.search;
+    let isNavigating = false;
+
+    const lockScroll = (locked: boolean) => {
+      if (locked) {
+        const gap = window.innerWidth - document.documentElement.clientWidth;
+        document.body.style.overflow = 'hidden';
+        if (gap > 0) document.body.style.paddingRight = `${gap}px`;
+      } else {
+        document.body.style.overflow = '';
+        document.body.style.paddingRight = '';
+      }
+    };
+
+    const closeAll = () => {
+      dialogs.forEach((d) => {
+        if (d.open) d.close();
+      });
+      lockScroll(false);
+    };
+
+    const open = (key: string) => {
+      const dialog = dialogs.get(key);
+      if (!dialog || dialog.open) return;
+      closeAll();
+      dialog.showModal();
+      dialog.querySelector<HTMLElement>('.modal__scroll')?.focus();
+      lockScroll(true);
+    };
+
+    // カードのクリック → モーダル
+    document.querySelectorAll<HTMLAnchorElement>('[data-work-open]').forEach((link) => {
+      link.addEventListener('click', (event) => {
+        // 新しいタブで開く操作は邪魔しない
+        if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+        if (event.button !== 0) return;
+
+        const key = link.dataset.workOpen;
+        if (!key || !dialogs.has(key)) return;
+
+        event.preventDefault();
+        const url = dialogs.get(key)!.dataset.workUrl ?? location.pathname;
+        history.pushState({ work: key }, '', url);
+        open(key);
+      });
+    });
+
+    // 閉じる操作はすべて履歴を1つ戻す形に統一する
+    const requestClose = () => {
+      if (isNavigating) return;
+      if (history.state?.work) {
+        history.back();
+      } else {
+        closeAll();
+        history.replaceState(null, '', homeUrl);
+      }
+    };
+
+    dialogs.forEach((dialog) => {
+      dialog.querySelector('[data-modal-close]')?.addEventListener('click', requestClose);
+
+      // Esc キー。既定の閉じる動作を止めて履歴側に寄せる
+      dialog.addEventListener('cancel', (event) => {
+        event.preventDefault();
+        requestClose();
+      });
+
+      // 背景（::backdrop）のクリックで閉じる
+      dialog.addEventListener('click', (event) => {
+        if (event.target === dialog) requestClose();
+      });
+    });
+
+    window.addEventListener('popstate', () => {
+      isNavigating = true;
+      const key = history.state?.work;
+      if (typeof key === 'string' && dialogs.has(key)) {
+        open(key);
+      } else {
+        closeAll();
+      }
+      isNavigating = false;
+    });
+  }
+</script>

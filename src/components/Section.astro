@@ -1,0 +1,36 @@
+---
+interface Props {
+  id: string;
+  /** 小さく出る英語ラベル */
+  eyebrow: string;
+  /** 見出し（各言語） */
+  title: string;
+  /** 幅を読み物幅に絞るか */
+  prose?: boolean;
+}
+
+const { id, eyebrow, title, prose = false } = Astro.props;
+---
+
+<section class="section" id={id}>
+  <div class={`container${prose ? ' container--prose' : ''}`}>
+    <header class="section__head reveal">
+      <p class="eyebrow">{eyebrow}</p>
+      <h2 class="section__title">{title}</h2>
+    </header>
+    <div class="section__body">
+      <slot />
+    </div>
+  </div>
+</section>
+
+<style>
+  .section__head {
+    margin-bottom: var(--space-6);
+  }
+
+  .section__title {
+    margin-top: var(--space-1);
+    font-size: var(--text-2xl);
+  }
+</style>

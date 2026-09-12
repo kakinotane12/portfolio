@@ -1,0 +1,332 @@
+/* =========================================================
+   デザイントークン
+   ミニマル / 余白重視。アクセントは青1色のみ。
+   色を変えたいときは --accent 系を差し替えるだけで全体に反映されます。
+   ========================================================= */
+:root {
+  color-scheme: light;
+
+  --bg: #ffffff;
+  --bg-subtle: #fafafa;
+  --surface: #ffffff;
+  --text: #16181d;
+  --text-muted: #6b7280;
+  --text-faint: #9ca3af;
+  --border: #e5e7eb;
+  --border-strong: #d1d5db;
+
+  /* アクセント: 落ち着いた青（検証用。あとで変更予定） */
+  --accent: #2563eb;
+  --accent-hover: #1d4ed8;
+  --accent-soft: rgba(37, 99, 235, 0.08);
+
+  --selection: rgba(37, 99, 235, 0.16);
+  --shadow: 0 1px 2px rgba(16, 24, 40, 0.04), 0 8px 24px rgba(16, 24, 40, 0.05);
+
+  /* タイポグラフィ */
+  --font-sans: 'Inter', 'Noto Sans JP', -apple-system, BlinkMacSystemFont,
+    'Hiragino Sans', 'Yu Gothic UI', 'Meiryo', system-ui, sans-serif;
+  --font-mono: 'SFMono-Regular', ui-monospace, 'Cascadia Mono', 'Menlo', monospace;
+
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1.0625rem; /* 17px: 日本語本文は少し大きめが読みやすい */
+  --text-lg: 1.125rem;
+  --text-xl: 1.375rem;
+  --text-2xl: 1.75rem;
+  --text-3xl: clamp(2rem, 1.4rem + 2.4vw, 2.75rem);
+  --text-4xl: clamp(2.5rem, 1.5rem + 4vw, 4rem);
+
+  /* 日本語は行間を広めに取らないと窮屈に見える */
+  --leading-body: 1.9;
+  --leading-tight: 1.25;
+
+  /* 8px グリッド */
+  --space-1: 0.5rem;
+  --space-2: 1rem;
+  --space-3: 1.5rem;
+  --space-4: 2rem;
+  --space-6: 3rem;
+  --space-8: 4rem;
+  --space-12: 6rem;
+  --section-gap: clamp(6rem, 4rem + 8vw, 9rem);
+
+  /* 幅 */
+  --width-prose: 44rem;   /* 読み物 約700px */
+  --width-content: 68rem; /* グリッド 約1100px */
+  --gutter: clamp(1.25rem, 0.5rem + 3vw, 2.5rem);
+
+  --radius: 10px;
+  --radius-lg: 16px;
+
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    color-scheme: dark;
+    --bg: #0d0e11;
+    --bg-subtle: #131519;
+    --surface: #15171c;
+    --text: #e9eaec;
+    --text-muted: #9ba2ac;
+    --text-faint: #6f7783;
+    --border: #24272e;
+    --border-strong: #333740;
+    --accent: #7aa2f7;
+    --accent-hover: #9ab8fa;
+    --accent-soft: rgba(122, 162, 247, 0.12);
+    --selection: rgba(122, 162, 247, 0.22);
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.35);
+  }
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --bg: #0d0e11;
+  --bg-subtle: #131519;
+  --surface: #15171c;
+  --text: #e9eaec;
+  --text-muted: #9ba2ac;
+  --text-faint: #6f7783;
+  --border: #24272e;
+  --border-strong: #333740;
+  --accent: #7aa2f7;
+  --accent-hover: #9ab8fa;
+  --accent-soft: rgba(122, 162, 247, 0.12);
+  --selection: rgba(122, 162, 247, 0.22);
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+/* =========================================================
+   リセット
+   ========================================================= */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+* { margin: 0; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+  scroll-padding-top: 6rem;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  line-height: var(--leading-body);
+  font-feature-settings: 'palt' 1; /* 日本語の約物を詰める */
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+::selection { background: var(--selection); }
+
+img, svg, video, iframe {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a { color: inherit; text-decoration: none; }
+
+button { font: inherit; color: inherit; background: none; border: none; cursor: pointer; }
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
+/* =========================================================
+   タイポグラフィ
+   ========================================================= */
+h1, h2, h3, h4 {
+  line-height: var(--leading-tight);
+  font-weight: 600;
+  letter-spacing: -0.02em; /* 見出しは字間を詰めると締まって見える */
+  text-wrap: balance;
+}
+
+p { text-wrap: pretty; }
+
+code, pre { font-family: var(--font-mono); font-size: 0.9em; }
+
+/* =========================================================
+   レイアウト部品
+   ========================================================= */
+.container {
+  width: 100%;
+  max-width: var(--width-content);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.container--prose { max-width: var(--width-prose); }
+
+.section { padding-block: var(--section-gap); }
+
+.section + .section { padding-top: 0; }
+
+.muted { color: var(--text-muted); }
+
+.eyebrow {
+  font-size: var(--text-xs);
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.skip-link {
+  position: absolute;
+  top: var(--space-1);
+  left: var(--space-1);
+  z-index: 100;
+  padding: 0.5rem 1rem;
+  background: var(--accent);
+  color: #fff;
+  border-radius: var(--radius);
+  transform: translateY(-200%);
+  transition: transform 0.2s var(--ease);
+}
+.skip-link:focus { transform: translateY(0); }
+
+/* テキストリンク */
+.link {
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.25em;
+  transition: color 0.15s var(--ease);
+}
+.link:hover { color: var(--accent-hover); }
+
+/* 矢印付きリンク */
+.link-arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--accent);
+}
+.link-arrow svg { transition: transform 0.2s var(--ease); }
+.link-arrow:hover svg { transform: translateX(3px); }
+.link-arrow--back svg { transform: rotate(180deg); }
+.link-arrow--back:hover svg { transform: rotate(180deg) translateX(3px); }
+
+/* タグ */
+.tag {
+  display: inline-block;
+  padding: 0.2em 0.7em;
+  font-size: var(--text-xs);
+  line-height: 1.7;
+  color: var(--text-muted);
+  background: var(--bg-subtle);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  white-space: nowrap;
+}
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  list-style: none;
+  padding: 0;
+}
+
+.rule {
+  height: 1px;
+  background: var(--border);
+  border: 0;
+}
+
+/* =========================================================
+   スクロール表示アニメーション（最小限）
+   ========================================================= */
+.reveal {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.6s var(--ease), transform 0.6s var(--ease);
+}
+.reveal.is-visible { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* =========================================================
+   本文（Markdown）
+   ========================================================= */
+.prose { max-width: var(--width-prose); }
+
+.prose > * + * { margin-top: var(--space-2); }
+
+.prose h2 {
+  margin-top: var(--space-8);
+  margin-bottom: var(--space-3);
+  padding-bottom: var(--space-1);
+  font-size: var(--text-xl);
+  border-bottom: 1px solid var(--border);
+}
+
+.prose h3 {
+  margin-top: var(--space-4);
+  margin-bottom: var(--space-1);
+  font-size: var(--text-lg);
+}
+
+.prose ul, .prose ol { padding-left: 1.4em; }
+.prose li + li { margin-top: 0.4em; }
+
+.prose a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
+}
+
+.prose blockquote {
+  padding-left: var(--space-2);
+  border-left: 2px solid var(--border-strong);
+  color: var(--text-muted);
+}
+
+.prose img { border-radius: var(--radius); border: 1px solid var(--border); }
+
+.prose code {
+  padding: 0.15em 0.4em;
+  background: var(--bg-subtle);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+}
+
+.prose pre {
+  padding: var(--space-2);
+  overflow-x: auto;
+  background: var(--bg-subtle);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+.prose pre code { padding: 0; background: none; border: 0; }

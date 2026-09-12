@@ -1,0 +1,150 @@
+---
+import { localizePath, type Lang } from '../i18n/config';
+import { useTranslations } from '../i18n/ui';
+import { profile } from '../data/profile';
+import LangSwitch from './LangSwitch.astro';
+import ThemeToggle from './ThemeToggle.astro';
+
+interface Props {
+  lang: Lang;
+  path: string;
+}
+
+const { lang, path } = Astro.props;
+const t = useTranslations(lang);
+
+const home = localizePath('/', lang);
+const isHome = path === '/';
+
+/** トップ内のセクションへは、下層ページからはトップ経由で飛ぶ */
+const sectionLink = (id: string) => (isHome ? `#${id}` : `${home}#${id}`);
+
+const navItems = [
+  { label: t('nav.awards'), href: sectionLink('awards') },
+  { label: t('nav.works'), href: sectionLink('works') },
+  { label: t('nav.skills'), href: sectionLink('skills') },
+  { label: t('nav.contact'), href: sectionLink('contact') },
+];
+---
+
+<header class="header">
+  <div class="header__inner container">
+    <a class="header__brand" href={home}>
+      <span class="header__name">{profile.name[lang]}</span>
+    </a>
+
+    <nav class="header__nav" aria-label={t('nav.menu')}>
+      <ul class="header__list">
+        {
+          navItems.map((item) => (
+            <li>
+              <a class="header__link" href={item.href}>
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <div class="header__tools">
+      <LangSwitch lang={lang} path={path} />
+      <ThemeToggle label={t('theme.toggle')} />
+    </div>
+  </div>
+</header>
+
+<style>
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: color-mix(in srgb, var(--bg) 80%, transparent);
+    backdrop-filter: saturate(180%) blur(12px);
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s var(--ease);
+  }
+
+  /* スクロールすると境界線が出る */
+  :global(body.is-scrolled) .header {
+    border-bottom-color: var(--border);
+  }
+
+  .header__inner {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    min-height: 4.5rem;
+  }
+
+  .header__brand {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+  }
+
+  .header__nav {
+    margin-inline-start: auto;
+  }
+
+  .header__list {
+    display: flex;
+    gap: var(--space-3);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .header__link {
+    position: relative;
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+    transition: color 0.15s var(--ease);
+  }
+
+  .header__link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -0.35em;
+    width: 100%;
+    height: 1px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.25s var(--ease);
+  }
+
+  .header__link:hover {
+    color: var(--text);
+  }
+  .header__link:hover::after {
+    transform: scaleX(1);
+  }
+
+  .header__tools {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+  }
+
+  /* 狭い画面ではナビを隠し、ブランドと操作ボタンだけ残す。
+     1ページ構成なのでスクロールでたどれる */
+  @media (max-width: 46rem) {
+    .header__nav {
+      display: none;
+    }
+    .header__tools {
+      margin-inline-start: auto;
+    }
+  }
+</style>
+
+<script>
+  const onScroll = () => {
+    document.body.classList.toggle('is-scrolled', window.scrollY > 8);
+  };
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+</script>

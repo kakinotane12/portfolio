@@ -1,0 +1,55 @@
+---
+/**
+ * 作品の単独ページ。
+ * 通常はトップページのモーダルで読まれますが、
+ * 直リンク・検索エンジン・JS 無効環境のためにこのページも生成しています。
+ */
+import type { CollectionEntry } from 'astro:content';
+import { localizePath, type Lang } from '../i18n/config';
+import { useTranslations } from '../i18n/ui';
+import WorkBody from './WorkBody.astro';
+import ArrowIcon from './ArrowIcon.astro';
+
+interface Props {
+  lang: Lang;
+  entry: CollectionEntry<'works'>;
+}
+
+const { lang, entry } = Astro.props;
+const t = useTranslations(lang);
+const backHref = `${localizePath('/', lang)}#works`;
+---
+
+<article class="work">
+  <div class="container container--prose">
+    <a class="link-arrow link-arrow--back work__back" href={backHref}>
+      <ArrowIcon />
+      {t('works.back')}
+    </a>
+
+    <WorkBody lang={lang} entry={entry} />
+
+    <div class="work__footer">
+      <a class="link-arrow link-arrow--back" href={backHref}>
+        <ArrowIcon />
+        {t('works.back')}
+      </a>
+    </div>
+  </div>
+</article>
+
+<style>
+  .work {
+    padding-top: clamp(3rem, 2rem + 5vw, 5rem);
+  }
+
+  .work__back {
+    margin-bottom: var(--space-6);
+  }
+
+  .work__footer {
+    margin-top: var(--space-12);
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--border);
+  }
+</style>

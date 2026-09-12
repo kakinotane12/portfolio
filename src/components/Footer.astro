@@ -1,0 +1,68 @@
+---
+import { type Lang } from '../i18n/config';
+import { useTranslations } from '../i18n/ui';
+import { profile, githubUrl } from '../data/profile';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const year = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <div class="footer__inner container">
+    <p class="footer__copy">© {year} {profile.name[lang]}</p>
+    <ul class="footer__links">
+      <li><a class="footer__link" href={githubUrl} rel="me noopener" target="_blank">GitHub</a></li>
+      <li><a class="footer__link" href={`mailto:${profile.email}`}>{t('contact.email')}</a></li>
+      <li>
+        <a class="footer__link" href="https://astro.build" rel="noopener" target="_blank">
+          {t('footer.builtWith')}
+        </a>
+      </li>
+    </ul>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    margin-top: var(--section-gap);
+    border-top: 1px solid var(--border);
+  }
+
+  .footer__inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-2);
+    padding-block: var(--space-4);
+  }
+
+  .footer__copy {
+    font-size: var(--text-xs);
+    color: var(--text-faint);
+  }
+
+  .footer__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .footer__link {
+    font-size: var(--text-xs);
+    color: var(--text-faint);
+    transition: color 0.15s var(--ease);
+  }
+
+  .footer__link:hover {
+    color: var(--text);
+  }
+</style>

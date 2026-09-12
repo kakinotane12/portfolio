@@ -1,0 +1,175 @@
+---
+import { localizePath, asset, type Lang } from '../i18n/config';
+import { useTranslations } from '../i18n/ui';
+import ArrowIcon from './ArrowIcon.astro';
+
+interface Props {
+  lang: Lang;
+  workKey: string;
+  title: string;
+  summary: string;
+  category?: string;
+  period: string;
+  role: string;
+  tech: string[];
+  cover?: string;
+  coverAlt?: string;
+}
+
+const { lang, workKey, title, summary, category, period, role, tech, cover, coverAlt } =
+  Astro.props;
+
+const t = useTranslations(lang);
+const href = localizePath(`/works/${workKey}`, lang);
+---
+
+<article class="card reveal">
+  <!-- href は残しておく。JS がモーダルを開き、Ctrl+クリックや検索エンジンには通常ページとして機能する -->
+  <a class="card__link" href={href} data-work-open={workKey}>
+    <div class="card__media">
+      {
+        cover ? (
+          <img src={asset(cover)} alt={coverAlt ?? ''} loading="lazy" decoding="async" width="800" height="500" />
+        ) : (
+          <div class="card__placeholder" aria-hidden="true" />
+        )
+      }
+    </div>
+
+    <div class="card__body">
+      <div class="card__meta">
+        {category && <span class="card__category">{category}</span>}
+        <span class="card__period">{period}</span>
+      </div>
+
+      <h3 class="card__title">{title}</h3>
+      <p class="card__summary">{summary}</p>
+
+      <p class="card__role">
+        <span class="card__roleLabel">{t('works.role')}</span>
+        {role}
+      </p>
+
+      {
+        tech.length > 0 && (
+          <ul class="tag-list card__tech">
+            {tech.slice(0, 4).map((item) => (
+              <li class="tag">{item}</li>
+            ))}
+          </ul>
+        )
+      }
+
+      <span class="link-arrow card__cta">
+        {t('works.detail')}
+        <ArrowIcon />
+      </span>
+    </div>
+  </a>
+</article>
+
+<style>
+  .card {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    background: var(--surface);
+    overflow: hidden;
+    transition:
+      border-color 0.2s var(--ease),
+      transform 0.2s var(--ease),
+      box-shadow 0.2s var(--ease);
+  }
+
+  .card:hover {
+    border-color: var(--border-strong);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+  }
+
+  .card__link {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .card__media {
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    background: var(--bg-subtle);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .card__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s var(--ease);
+  }
+
+  .card:hover .card__media img {
+    transform: scale(1.03);
+  }
+
+  .card__placeholder {
+    width: 100%;
+    height: 100%;
+    background:
+      linear-gradient(135deg, var(--accent-soft), transparent 60%),
+      var(--bg-subtle);
+  }
+
+  .card__body {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: var(--space-3);
+  }
+
+  .card__meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: var(--text-xs);
+    line-height: 1.6;
+    color: var(--text-faint);
+  }
+
+  .card__category {
+    color: var(--accent);
+    font-weight: 500;
+  }
+
+  .card__title {
+    margin-top: var(--space-1);
+    font-size: var(--text-lg);
+  }
+
+  .card__summary {
+    margin-top: 0.6rem;
+    font-size: var(--text-sm);
+    line-height: 1.85;
+    color: var(--text-muted);
+  }
+
+  .card__role {
+    margin-top: var(--space-2);
+    font-size: var(--text-xs);
+    color: var(--text-muted);
+  }
+
+  .card__roleLabel {
+    display: inline-block;
+    margin-right: 0.6em;
+    color: var(--text-faint);
+  }
+
+  .card__tech {
+    margin-top: var(--space-2);
+  }
+
+  .card__cta {
+    margin-top: auto;
+    padding-top: var(--space-3);
+  }
+</style>

@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="750" viewBox="0 0 1200 750" role="img" aria-label="Placeholder 2">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="hsl(265 70% 96%)"/>
+      <stop offset="100%" stop-color="hsl(265 40% 88%)"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="750" fill="url(#g)"/>
+  <g fill="none" stroke="hsl(265 30% 70%)" stroke-width="1.5" opacity="0.5">
+    <path d="M0 375h1200M600 0v750"/>
+  </g>
+  <text x="600" y="368" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="34" font-weight="600" fill="hsl(265 35% 40%)">Placeholder 2</text>
+  <text x="600" y="410" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="20" fill="hsl(265 25% 52%)">1200 &#215; 750</text>
+</svg>
