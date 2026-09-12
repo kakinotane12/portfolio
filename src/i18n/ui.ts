@@ -7,11 +7,8 @@ export const ui = {
     'nav.awards': 'Awards',
     'nav.skills': 'Skills',
     'nav.contact': 'Contact',
-    'nav.home': 'ホーム',
     'nav.skipToContent': '本文へスキップ',
     'nav.menu': 'メニュー',
-
-    'hero.scroll': 'Scroll',
 
     'section.about': 'About',
     'section.about.lead': '自己紹介',
@@ -24,16 +21,9 @@ export const ui = {
     'section.contact': 'Contact',
     'section.contact.lead': 'お問い合わせ',
 
-    'works.viewAll': 'すべての制作物を見る',
     'works.detail': '詳細を見る',
     'works.back': '制作物一覧へ戻る',
-    'works.period': '期間',
     'works.role': '担当',
-    'works.team': 'チーム規模',
-    'works.tech': '使用技術',
-    'works.gallery': 'スクリーンショット',
-    'works.links': '関連リンク',
-    'works.video': 'プレイ映像',
     'works.videoLoad': '動画を再生（YouTube を読み込みます）',
 
     'awards.note': '受賞・学会発表・展示',
@@ -56,11 +46,8 @@ export const ui = {
     'nav.awards': 'Awards',
     'nav.skills': 'Skills',
     'nav.contact': 'Contact',
-    'nav.home': 'Home',
     'nav.skipToContent': 'Skip to content',
     'nav.menu': 'Menu',
-
-    'hero.scroll': 'Scroll',
 
     'section.about': 'About',
     'section.about.lead': 'About me',
@@ -73,16 +60,9 @@ export const ui = {
     'section.contact': 'Contact',
     'section.contact.lead': 'Get in touch',
 
-    'works.viewAll': 'View all projects',
     'works.detail': 'View details',
     'works.back': 'Back to all projects',
-    'works.period': 'Period',
     'works.role': 'Role',
-    'works.team': 'Team size',
-    'works.tech': 'Tech stack',
-    'works.gallery': 'Screenshots',
-    'works.links': 'Links',
-    'works.video': 'Gameplay video',
     'works.videoLoad': 'Play video (loads YouTube)',
 
     'awards.note': 'Awards, presentations and exhibitions',

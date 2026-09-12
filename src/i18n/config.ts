@@ -17,7 +17,11 @@ export function localizePath(path: string, lang: Lang): string {
   return `${BASE}${prefix}/${clean ? clean + '/' : ''}`;
 }
 
-/** 言語プレフィックスを付けない静的アセット用パス */
+/**
+ * 言語プレフィックスを付けない静的アセット用パス。
+ * http(s) で始まる外部URLはそのまま返します（YouTubeのサムネイルなど）。
+ */
 export function asset(path: string): string {
+  if (/^https?:\/\//.test(path)) return path;
   return `${BASE}/${path.replace(/^\/+/, '')}`;
 }

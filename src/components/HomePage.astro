@@ -23,12 +23,20 @@ const works = (await getCollection('works', ({ data }) => data.lang === lang && 
 
 /** 日本語ページでは英字表記を、英語ページでは日本語表記を名前の下に添える */
 const nameSub = lang === 'ja' ? profile.name.en : profile.name.ja;
+
+/**
+ * カードの表紙画像。
+ * cover が未設定でも youtube があれば、その動画のサムネイルを使います。
+ * （hqdefault はどの動画にも必ず存在するサイズ）
+ */
+const coverOf = (data: (typeof works)[number]['data']) =>
+  data.cover ?? (data.youtube ? `https://i.ytimg.com/vi/${data.youtube}/hqdefault.jpg` : undefined);
 ---
 
 {/* ============ Hero ============ */}
 <section class="hero">
   <div class="container">
-    <p class="eyebrow hero__eyebrow">Portfolio</p>
+    <p class="eyebrow">Portfolio</p>
 
     <h1 class="hero__name">{profile.name[lang]}</h1>
 
@@ -37,16 +45,10 @@ const nameSub = lang === 'ja' ? profile.name.en : profile.name.ja;
       <span class="hero__romaji">{nameSub}</span>
     </p>
 
-    <p class="hero__intro">{profile.intro[lang]}</p>
-
     <dl class="hero__meta">
       <div class="hero__metaItem">
         <dt>Affiliation</dt>
         <dd>{profile.affiliation[lang]}</dd>
-      </div>
-      <div class="hero__metaItem">
-        <dt>Graduation</dt>
-        <dd>{profile.graduation[lang]}</dd>
       </div>
     </dl>
   </div>
@@ -121,11 +123,12 @@ const nameSub = lang === 'ja' ? profile.name.en : profile.name.ja;
           workKey={work.data.key}
           title={work.data.title}
           summary={work.data.summary}
+          award={work.data.award}
           category={work.data.category}
           period={work.data.period}
           role={work.data.role}
           tech={work.data.tech}
-          cover={work.data.cover}
+          cover={coverOf(work.data)}
           coverAlt={work.data.coverAlt}
         />
       ))
@@ -185,7 +188,7 @@ const nameSub = lang === 'ja' ? profile.name.en : profile.name.ja;
   /* ---------- Hero ---------- */
   .hero {
     padding-top: clamp(4rem, 2rem + 10vw, 9rem);
-    padding-bottom: var(--space-8);
+    padding-bottom: var(--space-1);
   }
 
   .hero__name {
@@ -209,19 +212,13 @@ const nameSub = lang === 'ja' ? profile.name.en : profile.name.ja;
     letter-spacing: 0.04em;
   }
 
-  .hero__intro {
-    max-width: var(--width-prose);
-    margin-top: var(--space-4);
-    color: var(--text-muted);
-  }
-
   .hero__meta {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
     gap: var(--space-3);
     max-width: var(--width-content);
-    margin-top: var(--space-8);
-    padding-top: var(--space-4);
+    margin-top: var(--space-3);
+    padding-top: var(--space-2);
     border-top: 1px solid var(--border);
   }
 
@@ -277,56 +274,37 @@ const nameSub = lang === 'ja' ? profile.name.en : profile.name.ja;
     line-height: 1.7;
   }
 
+  /* 作品名・論文名。賞名より軽くして、序列を一段下げる */
+  /* 作品名・受賞・活動内容はすべて同じ体裁で、1行ずつ並べる。
+     受賞は絵文字が目印になるので、太さや色では差をつけない。
+     1行1項目に固定しているのは、横並びだと文字数の差で日英の行数がずれるため */
+  /* 作品名・題目だけ一段だけ上げる。
+     下に続く受賞・活動の見出しとして働くよう、少し下に余白も取る */
   .awards__title {
-    margin-top: 0.35rem;
+    margin: 0.4rem 0 0.5rem;
+    font-size: var(--text-lg);
     font-weight: 500;
-    line-height: 1.6;
+    letter-spacing: -0.015em;
+    line-height: 1.55;
   }
 
-  /* 受賞はアクセント色のバッジで目立たせる */
-  .awards__badges {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin: var(--space-2) 0 0;
-    padding: 0;
-    list-style: none;
-  }
-
-  .awards__badge {
-    padding: 0.25em 0.8em;
-    font-size: var(--text-xs);
-    font-weight: 500;
-    line-height: 1.7;
-    color: var(--accent);
-    background: var(--accent-soft);
-    border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
-    border-radius: 100px;
-  }
-
-  /* 受賞以外（発表形態・展示など）は補足として控えめに */
+  .awards__badges,
   .awards__notes {
-    margin: 0.75rem 0 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+    margin: 0.25rem 0 0;
     padding: 0;
     list-style: none;
-    font-size: var(--text-sm);
-    color: var(--text-muted);
   }
 
+  .awards__badge,
   .awards__notes li {
-    position: relative;
-    padding-left: 1rem;
-    line-height: 1.8;
-  }
-
-  .awards__notes li::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0.85em;
-    width: 0.4rem;
-    height: 1px;
-    background: var(--border-strong);
+    font-size: var(--text-base);
+    font-weight: 400;
+    line-height: 1.6;
+    color: var(--text);
   }
 
   .awards__links {
@@ -347,10 +325,24 @@ const nameSub = lang === 'ja' ? profile.name.en : profile.name.ja;
   }
 
   /* ---------- Works ---------- */
+  /* 枠で囲わないので、間隔で区切りをつける。
+     幅に応じて 3列 → 2列 → 1列 と切り替える */
   .works {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
-    gap: var(--space-3);
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-6) var(--space-4);
+  }
+
+  @media (max-width: 62rem) {
+    .works {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 40rem) {
+    .works {
+      grid-template-columns: 1fr;
+    }
   }
 
   /* ---------- Skills ---------- */

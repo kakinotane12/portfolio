@@ -1,50 +1,29 @@
 ---
 lang: ja
 key: contest-game
-title: "TODO: コンテスト出展したゲームのタイトル"
-summary: "TODO（コンテスト名）に出展したチーム制作。TODO（どんな体験か1行で）。"
-category: ゲーム開発
-period: 2024年10月 – 2025年2月
-role: "TODO（例: メインプログラマ）"
-teamSize: 5名
+title: "Entrust(X)"
+summary: "ステガノグラフィを用いた写真共有型の謎解きゲーム"
+award: "🏆IVRC2026 メタバース部門 最優秀賞・長谷川晶一賞（特別審査員賞）"
+description: |
+  VRChat上で遊べる、写真の共有を軸にした謎解きゲームです。ゲーム内で撮影した写真に [#EntrustX](https://x.com/search?q=%23EntrustX&src=typed_query) を付けてXに投稿すると、後日、ワールド内の撮影された場所にその写真が現れます。
+
+  これは、写真そのものに情報を隠して埋め込むステガノグラフィによって実現しています。シェーダーでカメラ座標などを画像に書き込み、サーバーとクライアントで復号する仕組みです。
+  
+  記念写真をXに投稿するという既存のVRChat文化をそのまま利用し、時間やインスタンスを越えたコミュニケーションを可能にする作品です。
+
+  5人チームで開発を行い、主に企画とステガノグラフィ機能の開発を担当し、IVRC2026メタバース部門で最優秀賞受賞と特別審査員賞をいただきました。
+
+  解説記事：https://note.com/hadnf/n/n0c41e3211e3d?sub_rt=share_pb
+  起動リンク：[VRChatでワールドを開く](https://vrchat.com/home/launch?worldId=wrld_8bb0c0d8-5cc6-4050-9fc6-420caf14f154)
+category: ゲーム
+period: 2026年5月 – 現在
+role: "企画・ステガノグラフィ機能開発"
 tech:
   - Unity
   - C#
-cover: /images/placeholder-2.svg
-coverAlt: ゲームのメインビジュアル
-youtube: ""
-screenshots:
-  - src: /images/placeholder-2.svg
-    alt: ゲームプレイ中の画面
-links:
-  - label: "コンテスト結果ページ"
-    url: "https://example.com"
-order: 20
+  - Shader
+  - Python
+youtube: "https://youtu.be/_8B_9jyyw9g?si=Lr5RnjBYghxm7h6h"
+order: 10
 draft: false
 ---
-
-## 概要
-
-TODO: どんなコンテストに、どんな狙いで出したのかを3〜4文で書きます。受賞歴があればここで明記します（採用担当は第三者評価を重視します）。
-
-## 課題と解決
-
-### 課題1: TODO
-
-TODO: 問題の背景と制約を書きます。
-
-**解決:** TODO: どう考えて解決したかを書きます。
-
-### 課題2: TODO
-
-**解決:** TODO
-
-## 担当範囲
-
-- TODO: 実装した機能
-- TODO: 担当した工程
-- TODO: チームでの役割
-
-## 学び
-
-TODO: 2〜3文で書きます。

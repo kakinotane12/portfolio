@@ -7,29 +7,29 @@ export const profile = {
   /** 読みにくい漢字なので、日本語ページでは名前の下に読みを出します */
   nameReading: 'しのみや いぶき',
 
-  /** About セクション本文 */
+  /**
+   * About セクション本文。
+   * 配列の1要素が1段落になります。
+   * 段落を分けたいときは要素を増やしてください（末尾のカンマを忘れずに）:
+   *   ja: ['1段落目の文章。', '2段落目の文章。'],
+   */
   about: {
     ja: [
-      'TODO: 大学での研究テーマと、そこで何に興味を持っているかを2〜3文で書きます。',
-      'TODO: ゲーム開発を始めたきっかけと、チーム制作で担ってきた役割を2〜3文で書きます。',
-      'TODO: これから伸ばしたい方向や、どんな仕事に関わりたいかを1〜2文で書きます。',
+      '研究やゲーム開発を中心に、ゲーム・esports関係の活動に取り組んでいます。',
+      '研究では、FPSゲームプレイヤーのエイムパフォーマンスと脳活動の関係を分析し、卒業研究と学会発表を行いました。',
+      '開発では、チームでのVRゲーム制作に取り組み、コンテストでの受賞や学会でのデモ展示を経験しました。',
     ],
     en: [
-      'TODO: Two or three sentences about your research theme and what draws you to it.',
-      'TODO: Two or three sentences about how you got into game development and the roles you have taken on in team projects.',
-      'TODO: One or two sentences about where you want to grow and the kind of work you want to do.',
+      'My work centres on games and esports, mainly through academic research and game development.',
+      'My research analyses the relationship between aiming performance and brain activity in FPS players, written up as my graduation thesis and presented at an academic conference.',
+      'On the development side, I build VR games with a team — work that has won a contest award and been exhibited as a demo at an academic conference.',
     ],
   },
 
   affiliation: {
-    ja: 'ダミー大学 ダミー学部 ダミー学科',
-    en: 'Dummy University, Faculty of Dummy Studies',
+    ja: '慶應義塾大学 理工学研究科 人間・社会システム情報科学専攻 修士1年',
+    en: 'M1 Student, School of Informatics, Management, and Human Sciences, Graduate School of Science and Technology, Keio University',
   },
-  graduation: {
-    ja: '2027年3月 卒業予定',
-    en: 'Expected graduation: March 2027',
-  },
-  location: { ja: '日本', en: 'Japan' },
 
   /** TODO: 公開してよい連絡用メールアドレスに差し替えてください */
   email: 'TODO@example.com',

@@ -1,0 +1,49 @@
+---
+/**
+ * 自前の動画ファイルの再生。
+ * preload="none" にしてあるので、再生ボタンが押されるまで動画は読み込まれません。
+ * 最初に見えているのはポスター画像だけです。
+ */
+import { asset } from '../i18n/config';
+
+interface Props {
+  src: string;
+  poster?: string;
+  title: string;
+}
+
+const { src, poster, title } = Astro.props;
+---
+
+<video
+  class="localVideo"
+  controls
+  playsinline
+  preload="none"
+  poster={poster ? asset(poster) : undefined}
+  title={title}
+>
+  <source src={asset(src)} type="video/mp4" />
+</video>
+
+<style>
+  .localVideo {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    background: #000;
+  }
+</style>
+
+<script>
+  /**
+   * モーダルが閉じたら再生を止める。
+   * 止めないと、閉じたあとも音声が鳴り続ける。
+   */
+  document.addEventListener('video:stop', () => {
+    document.querySelectorAll<HTMLVideoElement>('video.localVideo').forEach((video) => {
+      if (!video.paused) video.pause();
+    });
+  });
+</script>

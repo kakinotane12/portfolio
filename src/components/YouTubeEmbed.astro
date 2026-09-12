@@ -13,12 +13,21 @@ interface Props {
 }
 
 const { videoId, title, loadLabel } = Astro.props;
+// maxresdefault は高画質だが動画によっては存在しないので、無ければ hqdefault に落とす
 const thumbnail = `https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg`;
+const thumbnailFallback = `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`;
 ---
 
 <div class="video" data-video-id={videoId} data-title={title}>
   <button class="video__button" type="button" aria-label={loadLabel}>
-    <img class="video__thumb" src={thumbnail} alt="" loading="lazy" decoding="async" />
+    <img
+      class="video__thumb"
+      src={thumbnail}
+      data-fallback={thumbnailFallback}
+      alt=""
+      loading="lazy"
+      decoding="async"
+    />
     <span class="video__play" aria-hidden="true">
       <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z" /></svg>
     </span>
@@ -36,10 +45,19 @@ const thumbnail = `https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg`;
     border-radius: var(--radius);
   }
 
+  /* 再生中はサムネイルの上に重ねる。差し替えではなく重ねることで、
+     停止したときに元のサムネイルへ戻せる */
   .video :global(iframe) {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
     width: 100%;
     height: 100%;
     border: 0;
+  }
+
+  .video.is-playing .video__button {
+    visibility: hidden;
   }
 
   .video__button {
@@ -96,6 +114,18 @@ const thumbnail = `https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg`;
 </style>
 
 <script>
+  // 高画質サムネイルが無い動画では 404 画像になるため、標準サイズに差し替える
+  document.querySelectorAll<HTMLImageElement>('.video__thumb[data-fallback]').forEach((img) => {
+    img.addEventListener(
+      'error',
+      () => {
+        const fallback = img.dataset.fallback;
+        if (fallback && img.src !== fallback) img.src = fallback;
+      },
+      { once: true },
+    );
+  });
+
   document.querySelectorAll<HTMLElement>('.video').forEach((wrapper) => {
     const button = wrapper.querySelector('.video__button');
     button?.addEventListener('click', () => {
@@ -109,7 +139,20 @@ const thumbnail = `https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg`;
       iframe.allow =
         'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
       iframe.allowFullscreen = true;
-      wrapper.replaceChildren(iframe);
+      wrapper.appendChild(iframe);
+      wrapper.classList.add('is-playing');
+    });
+  });
+
+  /**
+   * 再生を止める。
+   * iframe を消さないと、モーダルを閉じても音声が鳴り続ける。
+   * YouTube の API を読み込まずに確実に止めるため、要素ごと破棄している。
+   */
+  document.addEventListener('video:stop', () => {
+    document.querySelectorAll<HTMLElement>('.video.is-playing').forEach((wrapper) => {
+      wrapper.querySelector('iframe')?.remove();
+      wrapper.classList.remove('is-playing');
     });
   });
 </script>

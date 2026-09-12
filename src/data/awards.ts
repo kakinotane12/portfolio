@@ -25,15 +25,16 @@ export type AwardEntry = {
 export const awards: AwardEntry[] = [
   {
     date: { ja: '2026年9月', en: 'Sep 2026' },
-    org: { ja: 'IVRC メタバース部門', en: 'IVRC, Metaverse Division' },
+    org: { ja: 'IVRC 2026 メタバース部門', en: 'IVRC 2026 Metaverse Division' },
     title: { ja: '作品名：Entrust(X)', en: 'Game Title：Entrust(X)' },
     results: [
-      { label: { ja: '🏆最優秀賞', en: '🏆Grand Prize' } },
+      { label: { ja: '🏆最優秀賞', en: '🏆Grand Prize' }, award: true },
       {
         label: {
           ja: '🏆長谷川晶一賞（特別審査員賞）',
           en: '🏆Shoichi Hasegawa Award (Special Jury Prize)',
         },
+        award: true,
       },
       {
         label: {
@@ -45,23 +46,23 @@ export const awards: AwardEntry[] = [
   },
   {
     date: { ja: '2026年9月', en: 'Sep 2026' },
-    org: { ja: '日本心理学会', en: 'The Japanese Psychological Association' },
+    org: { ja: '日本心理学会 第90回大会', en: 'The Japanese Psychological Association' },
     title: {
       ja: '「シューティングゲーム中の脳活動に対する熟練度の影響」',
-      en: 'Effects of skill level on brain activity during shooting game play',
+      en: 'Title: Effects of skill level on brain activity during shooting game play',
     },
     results: [{ label: { ja: 'ポスター発表', en: 'Poster presentation' } }],
   },
   {
     date: { ja: '2026年3月', en: 'Mar 2026' },
     org: {
-      ja: '慶應義塾大学 理工学部 情報工学科',
+      ja: '慶應義塾大学 理工学部 情報工学科 卒業論文',
       en: 'Department of Information and Computer Science, Keio University',
     },
     title: {
       ja: '「First Person Shooterゲームプレイヤーのエイムパフォーマンスと脳活動の評価」',
-      en: 'Evaluation of aiming performance and brain activity in first-person shooter game players',
+      en: 'Title: Evaluation of aiming performance and brain activity in first-person shooter game players',
     },
-    results: [{ label: { ja: '🏆優秀卒業論文賞', en: '🏆Outstanding Graduation Thesis Award' } }],
+    results: [{ label: { ja: '🏆優秀卒業論文賞', en: '🏆Outstanding Graduation Thesis Award' }, award: true }],
   },
 ];
