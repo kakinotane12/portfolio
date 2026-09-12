@@ -68,7 +68,6 @@ const coverOf = (data: (typeof works)[number]['data']) =>
 
 {/* ============ 表彰・活動 ============ */}
 <Section id="awards" eyebrow={t('section.awards')} title={t('section.awards.lead')} prose>
-  <p class="muted awards__note reveal">{t('awards.note')}</p>
 
   <ol class="awards">
     {
@@ -131,7 +130,6 @@ const coverOf = (data: (typeof works)[number]['data']) =>
           award={work.data.award}
           category={work.data.category}
           period={work.data.period}
-          role={work.data.role}
           tech={work.data.tech}
           cover={coverOf(work.data)}
           coverAlt={work.data.coverAlt}

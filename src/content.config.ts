@@ -20,8 +20,10 @@ const works = defineCollection({
     /** 一覧カードに出る一言。1〜2行が目安 */
     summary: z.string(),
     /**
-     * 受賞内容。一覧カードの summary の下に、同じ体裁で並びます。
+     * 受賞内容・関連する活動。一覧カードの summary の下に、同じ体裁で並びます。
      * 強調は「表彰・活動」セクションが担うので、ここでは目立たせません。
+     *
+     * 複数あるときは award: | と書いて改行で区切ると、1行につき1項目として並びます。
      */
     award: z.string().optional(),
     /**
@@ -33,8 +35,12 @@ const works = defineCollection({
     description: z.string().optional(),
 
     period: z.string(),
-    /** 担当した役割。チーム規模もここに書けます（例: プログラマ / 4名チーム） */
-    role: z.string(),
+    /**
+     * 担当した役割。
+     * 現在どこにも表示していません（役割は description の文章の中に書く方針）。
+     * 書いても書かなくてもエラーにはなりません。
+     */
+    role: z.string().optional(),
     tech: z.array(z.string()).default([]),
     /** カテゴリ表示用（例: ゲーム開発 / 研究） */
     category: z.string().optional(),

@@ -13,7 +13,7 @@ export const ui = {
     'section.about': 'About',
     'section.about.lead': '自己紹介',
     'section.works': 'Works',
-    'section.works.lead': '制作物',
+    'section.works.lead': '制作物・活動成果',
     'section.awards': 'Awards',
     'section.awards.lead': '表彰・活動',
     'section.skills': 'Skills',

@@ -11,17 +11,22 @@ interface Props {
   award?: string;
   category?: string;
   period: string;
-  role: string;
   tech: string[];
   cover?: string;
   coverAlt?: string;
 }
 
-const { lang, workKey, title, summary, award, category, period, role, tech, cover, coverAlt } =
+const { lang, workKey, title, summary, award, category, period, tech, cover, coverAlt } =
   Astro.props;
 
 const t = useTranslations(lang);
 const href = localizePath(`/works/${workKey}`, lang);
+
+/** award は改行で区切って複数書ける。1行につき1項目として並べる */
+const awardLines = (award ?? '')
+  .split('\n')
+  .map((line) => line.trim())
+  .filter(Boolean);
 ---
 
 <article class="card reveal">
@@ -52,12 +57,15 @@ const href = localizePath(`/works/${workKey}`, lang);
 
       <h3 class="card__title">{title}</h3>
       <p class="card__summary">{summary}</p>
-      {award && <p class="card__award">{award}</p>}
-
-      <p class="card__role">
-        <span class="card__roleLabel">{t('works.role')}</span>
-        {role}
-      </p>
+      {
+        awardLines.length > 0 && (
+          <ul class="card__awards">
+            {awardLines.map((line) => (
+              <li>{line}</li>
+            ))}
+          </ul>
+        )
+      }
 
       {
         tech.length > 0 && (
@@ -134,6 +142,9 @@ const href = localizePath(`/works/${workKey}`, lang);
   .card__title {
     margin-top: var(--space-1);
     font-size: var(--text-lg);
+    /* 見出しの既定（global.css の text-wrap: balance）は行の長さを揃えようとして
+       幅を使い切る前に折り返す。カード内では右端まで詰めたいので打ち消す */
+    text-wrap: wrap;
   }
 
   /* タイトル（20px）より一段だけ小さくする。差は色でつける */
@@ -147,26 +158,23 @@ const href = localizePath(`/works/${workKey}`, lang);
     text-wrap: wrap;
   }
 
-  /* summary と同じ体裁。強調は「表彰・活動」セクションが担う */
-  .card__award {
-    margin-top: 0.4rem;
+  /* summary と同じ体裁。強調は「表彰・活動」セクションが担う。
+     award に改行を入れると、1行につき1項目として並ぶ */
+  .card__awards {
+    margin: 0.4rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .card__awards li {
     font-size: var(--text-base);
     line-height: 1.7;
     color: var(--text-muted);
     text-wrap: wrap;
   }
 
-  .card__role {
-    margin-top: var(--space-2);
-    font-size: var(--text-sm);
-    line-height: 1.7;
-    color: var(--text-muted);
-  }
-
-  .card__roleLabel {
-    display: inline-block;
-    margin-right: 0.6em;
-    color: var(--text-faint);
+  .card__awards li + li {
+    margin-top: 0.2rem;
   }
 
   .card__tech {
