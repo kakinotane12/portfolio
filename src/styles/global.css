@@ -1,6 +1,6 @@
 /* =========================================================
    デザイントークン
-   ミニマル / 余白重視。アクセントは青1色のみ。
+   ミニマル / 余白重視。アクセントは赤1色のみ。
    色を変えたいときは --accent 系を差し替えるだけで全体に反映されます。
    ========================================================= */
 :root {
@@ -15,12 +15,12 @@
   --border: #e5e7eb;
   --border-strong: #d1d5db;
 
-  /* アクセント: 落ち着いた青（検証用。あとで変更予定） */
-  --accent: #2563eb;
-  --accent-hover: #1d4ed8;
-  --accent-soft: rgba(37, 99, 235, 0.08);
+  /* アクセント: #FF4655 */
+  --accent: #ff4655;
+  --accent-hover: #d93344;
+  --accent-soft: rgba(255, 70, 85, 0.08);
 
-  --selection: rgba(37, 99, 235, 0.16);
+  --selection: rgba(255, 70, 85, 0.16);
   --shadow: 0 1px 2px rgba(16, 24, 40, 0.04), 0 8px 24px rgba(16, 24, 40, 0.05);
 
   /* タイポグラフィ */
@@ -74,10 +74,10 @@
     --text-faint: #6f7783;
     --border: #24272e;
     --border-strong: #333740;
-    --accent: #7aa2f7;
-    --accent-hover: #9ab8fa;
-    --accent-soft: rgba(122, 162, 247, 0.12);
-    --selection: rgba(122, 162, 247, 0.22);
+    --accent: #ff4655;
+    --accent-hover: #ff707c;
+    --accent-soft: rgba(255, 70, 85, 0.14);
+    --selection: rgba(255, 70, 85, 0.24);
     --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.35);
   }
 }
@@ -92,10 +92,10 @@
   --text-faint: #6f7783;
   --border: #24272e;
   --border-strong: #333740;
-  --accent: #7aa2f7;
-  --accent-hover: #9ab8fa;
-  --accent-soft: rgba(122, 162, 247, 0.12);
-  --selection: rgba(122, 162, 247, 0.22);
+  --accent: #ff4655;
+  --accent-hover: #ff707c;
+  --accent-soft: rgba(255, 70, 85, 0.14);
+  --selection: rgba(255, 70, 85, 0.24);
   --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.35);
 }
 

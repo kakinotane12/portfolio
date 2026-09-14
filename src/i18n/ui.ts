@@ -28,7 +28,6 @@ export const ui = {
 
     'awards.note': '受賞・学会発表・展示',
 
-    'contact.lead': 'ご連絡はメールまたは GitHub からお願いいたします。',
     'contact.email': 'メール',
     'contact.github': 'GitHub',
 

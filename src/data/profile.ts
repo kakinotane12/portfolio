@@ -32,7 +32,7 @@ export const profile = {
   },
 
   /** TODO: 公開してよい連絡用メールアドレスに差し替えてください */
-  email: 'TODO@example.com',
+  email: 'shinomiya403812@gmail.com',
   githubUser: 'kakinotane12',
 } as const;
 

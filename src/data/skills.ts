@@ -16,26 +16,22 @@ export const skills: SkillGroup[] = [
   {
     category: { ja: '言語', en: 'Languages' },
     items: [
-      { name: 'C#', usedIn: { ja: 'ゲーム開発', en: 'Game development' } },
+      { name: 'MATLAB',usedIn: { ja: '研究・データ分析', en: 'Research & analysis' }  },
       { name: 'Python', usedIn: { ja: '研究・データ分析', en: 'Research & analysis' } },
+      { name: 'C#', usedIn: { ja: 'ゲーム開発', en: 'Game development' } },
       { name: 'C / C++' },
-      { name: 'TypeScript' },
     ],
   },
   {
     category: { ja: 'エンジン・フレームワーク', en: 'Engines & Frameworks' },
     items: [
-      { name: 'Unity', usedIn: { ja: 'チーム制作 / 学会展示', en: 'Team projects / Exhibition' } },
-      { name: 'Blender' },
-      { name: 'PyTorch' },
+      { name: 'Unity', usedIn: { ja: 'ゲーム開発', en: 'Game development' } },
     ],
   },
   {
     category: { ja: 'ツール・環境', en: 'Tools & Environment' },
     items: [
-      { name: 'Git / GitHub' },
-      { name: 'LaTeX', usedIn: { ja: '論文執筆', en: 'Paper writing' } },
-      { name: 'Figma' },
+      { name: 'Git / GitHub',usedIn: { ja: 'チーム開発・スクリプト管理', en: 'Team Development' } },
     ],
   },
 ];
