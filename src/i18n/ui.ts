@@ -25,6 +25,8 @@ export const ui = {
     'works.back': '制作物一覧へ戻る',
     'works.role': '担当',
     'works.videoLoad': '動画を再生（YouTube を読み込みます）',
+    'tech.language': '言語',
+    'tech.tool': 'ツール',
 
     'awards.note': '受賞・学会発表・展示',
 
@@ -63,6 +65,8 @@ export const ui = {
     'works.back': 'Back to all projects',
     'works.role': 'Role',
     'works.videoLoad': 'Play video (loads YouTube)',
+    'tech.language': 'Languages',
+    'tech.tool': 'Tools',
 
     'awards.note': 'Awards, presentations and exhibitions',
 

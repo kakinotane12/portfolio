@@ -2,11 +2,11 @@
 lang: ja
 key: contest-game
 title: "Entrust(X)"
-summary: "ステガノグラフィを使った写真共有型の謎解きゲーム"
+summary: "ステガノグラフィを用いた写真共有型の謎解きゲーム"
 award: |
   🏆IVRC2026メタバース部門 最優秀賞
-  🏆長谷川晶一賞（特別審査員賞）
-  デモ展示 ＠日本バーチャルリアリティ学会大会
+  🏆長谷川晶一賞
+  展示 ＠日本バーチャルリアリティ学会
 description: |
   VRChat上で遊べる、写真の共有を軸にした謎解きゲームです。ゲーム内で撮影した写真に [#EntrustX](https://x.com/search?q=%23EntrustX&src=typed_query) を付けてXに投稿すると、後日、ワールド内の撮影された場所にその写真が現れます。
 
@@ -22,10 +22,16 @@ category: IVRC
 period: 2026年5月 – 現在
 role: "企画・ステガノグラフィ機能開発"
 tech:
+  - VRChat
   - Unity
   - C#
-  - Shader
+  - UdonSharp
+  - HLSL
   - Python
+  - JavaScript
+  - Render
+  - Google Apps Script
+  - Git
 youtube: "https://youtu.be/_8B_9jyyw9g?si=Lr5RnjBYghxm7h6h"
 order: 10
 draft: false

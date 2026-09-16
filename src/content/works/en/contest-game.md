@@ -11,8 +11,16 @@ category: Game Development
 period: Oct 2024 – Feb 2025
 role: "TODO (e.g. Lead Programmer / team of 5)"
 tech:
+  - VRChat
   - Unity
   - C#
+  - UdonSharp
+  - HLSL
+  - Python
+  - JavaScript
+  - Google Apps Script
+  - Render
+  - Git
 cover: /images/placeholder-2.svg
 coverAlt: Key visual of the game
 youtube: ""

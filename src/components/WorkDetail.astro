@@ -12,6 +12,7 @@ import YouTubeEmbed from './YouTubeEmbed.astro';
 import LocalVideo from './LocalVideo.astro';
 import RichText from './RichText.astro';
 import ArrowIcon from './ArrowIcon.astro';
+import TechList from './TechList.astro';
 
 interface Props {
   lang: Lang;
@@ -55,6 +56,8 @@ const backHref = `${localizePath('/', lang)}#works`;
 
     <h1 class="work__title">{work.title}</h1>
     <RichText class="work__description" text={work.description ?? work.summary} />
+
+    {work.tech.length > 0 && <TechList lang={lang} tech={work.tech} grouped class="work__tech" />}
 
     <div class="work__footer">
       <a class="link-arrow link-arrow--back" href={backHref}>
@@ -109,6 +112,10 @@ const backHref = `${localizePath('/', lang)}#works`;
 
   .work__description > * + * {
     margin-top: var(--space-2);
+  }
+
+  .work__tech {
+    margin-top: var(--space-6);
   }
 
   .work__footer {

@@ -232,25 +232,89 @@ code, pre { font-family: var(--font-mono); font-size: 0.9em; }
 .link-arrow--back svg { transform: rotate(180deg); }
 .link-arrow--back:hover svg { transform: rotate(180deg) translateX(3px); }
 
-/* タグ */
-.tag {
-  display: inline-block;
-  padding: 0.2em 0.7em;
-  font-size: var(--text-xs);
-  line-height: 1.7;
+/* 技術スタック（スペック行）
+   囲み枠は使わず、等幅・小さめ・字間で「メタ情報」であることを示す。
+   区切りは枠の代わりに罫線1本と、広めの横方向 gap で取る。
+   罫線は用途ごとに位置が違うので、ここではなく呼び出し側（.card__tech 等）で引く。 */
+.tech-list {
+  display: flex;
+  flex-wrap: wrap;
+  /* subgrid で行の高さが共有されるため、行数の少ないカードでは上端に寄せる
+     （既定の stretch だと縦中央に来てカード間でずれる） */
+  align-content: start;
+  gap: 0.5rem 1.25rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tech-list__item,
+.tech-list__more {
+  /* アイコンと名称が行またぎで泣き別れしないよう、ペアごとに折り返しを止める */
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45em;
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  line-height: 1.5;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
   color: var(--text-muted);
-  background: var(--bg-subtle);
-  border: 1px solid var(--border);
-  border-radius: 100px;
   white-space: nowrap;
 }
 
-.tag-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  list-style: none;
-  padding: 0;
+/* 省略された件数。本体より一段淡くして、技術名と読み違えないようにする */
+.tech-list__more {
+  color: var(--text-faint);
+}
+
+/* ロゴごとに viewBox の余白がばらつくので、固定の正方形に入れて起点を揃える */
+.tech-icon {
+  display: inline-flex;
+  flex: none;
+  width: 1.15em;
+  height: 1.15em;
+}
+
+.tech-icon svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* 言語 / ツールで行を分ける版（モーダル・詳細ページ） */
+.tech-groups {
+  display: grid;
+  gap: 0.9rem;
+  margin: 0;
+  padding-top: var(--space-2);
+  border-top: 1px solid var(--border);
+}
+
+.tech-group {
+  display: grid;
+  grid-template-columns: 5rem 1fr;
+  gap: 0.35rem 1.25rem;
+  align-items: baseline;
+}
+
+/* ラベルは日本語が入るので等幅にはしない（和文が別フォントに落ちて不揃いになる） */
+.tech-group__label {
+  font-size: var(--text-xs);
+  letter-spacing: 0.04em;
+  color: var(--text-faint);
+}
+
+.tech-group__items {
+  margin: 0;
+}
+
+/* 狭い画面ではラベルを上に積む */
+@media (max-width: 30rem) {
+  .tech-group {
+    grid-template-columns: 1fr;
+    gap: 0.3rem;
+  }
 }
 
 /* =========================================================

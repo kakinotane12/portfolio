@@ -5,6 +5,7 @@ import { useTranslations } from '../i18n/ui';
 import YouTubeEmbed from './YouTubeEmbed.astro';
 import LocalVideo from './LocalVideo.astro';
 import RichText from './RichText.astro';
+import TechList from './TechList.astro';
 
 interface Props {
   lang: Lang;
@@ -56,6 +57,8 @@ const titleId = `work-title-${key}`;
     <div class="modal__body">
       <h2 class="modal__title" id={titleId}>{work.title}</h2>
       <RichText class="modal__description" text={work.description ?? work.summary} />
+
+      {work.tech.length > 0 && <TechList lang={lang} tech={work.tech} grouped class="modal__tech" />}
     </div>
   </div>
 </dialog>
@@ -179,6 +182,10 @@ const titleId = `work-title-${key}`;
 
   .modal__description > * + * {
     margin-top: var(--space-2);
+  }
+
+  .modal__tech {
+    margin-top: var(--space-6);
   }
 
   /* ---------- 閉じるボタン ---------- */

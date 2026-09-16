@@ -2,6 +2,7 @@
 import { localizePath, asset, type Lang } from '../i18n/config';
 import { useTranslations } from '../i18n/ui';
 import ArrowIcon from './ArrowIcon.astro';
+import TechList from './TechList.astro';
 
 interface Props {
   lang: Lang;
@@ -57,25 +58,15 @@ const awardLines = (award ?? '')
 
       <h3 class="card__title">{title}</h3>
       <p class="card__summary">{summary}</p>
-      {
-        awardLines.length > 0 && (
-          <ul class="card__awards">
-            {awardLines.map((line) => (
-              <li>{line}</li>
-            ))}
-          </ul>
-        )
-      }
+      {/* 受賞・技術は中身が無くても要素は出す。カード間で行数を一定に保つため（下の subgrid 参照） */}
+      <ul class="card__awards">
+        {awardLines.map((line) => (
+          <li>{line}</li>
+        ))}
+      </ul>
 
-      {
-        tech.length > 0 && (
-          <ul class="tag-list card__tech">
-            {tech.slice(0, 4).map((item) => (
-              <li class="tag">{item}</li>
-            ))}
-          </ul>
-        )
-      }
+      {/* カードでは主要なものだけ。全件はモーダル／詳細ページに出す */}
+      <TechList lang={lang} tech={tech} limit={5} class="card__tech" />
 
       <span class="link-arrow card__cta">
         {t('works.detail')}
@@ -121,10 +112,10 @@ const awardLines = (award ?? '')
     display: flex;
     flex-direction: column;
     flex: 1;
-    padding-top: var(--space-2);
   }
 
   .card__meta {
+    margin-top: var(--space-2);
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -137,6 +128,11 @@ const awardLines = (award ?? '')
   .card__category {
     color: var(--accent);
     font-weight: 500;
+  }
+
+  /* 期間は本文（card__summary）と同じ濃さに揃える */
+  .card__period {
+    color: var(--text-muted);
   }
 
   .card__title {
@@ -178,16 +174,45 @@ const awardLines = (award ?? '')
   }
 
   .card__tech {
-    margin-top: var(--space-2);
+    margin-top: var(--space-3);
+    padding-top: var(--space-2);
+    border-top: 1px solid var(--border);
   }
 
-  /* タグは global.css の .tag を使っているので、カード内だけ上書きする */
-  .card__tech :global(.tag) {
-    font-size: var(--text-sm);
+  .card__awards:not(:has(li)),
+  .card__tech:not(:has(li)) {
+    margin: 0;
+    padding: 0;
+    border: 0;
   }
 
   .card__cta {
     margin-top: auto;
     padding-top: var(--space-3);
+  }
+
+  /* カード同士で「タイトル」「概要」「受賞」「技術」の開始位置を横方向にそろえる。
+     カード内部の行を .works グリッドの行に subgrid でつなぐことで、
+     行の高さが横並びのカード全体で共有される。
+     非対応ブラウザでは上の flex レイアウトのまま（そろわないだけで崩れはしない）。 */
+  @supports (grid-template-rows: subgrid) {
+    .card,
+    .card__link,
+    .card__body {
+      display: grid;
+      grid-template-rows: subgrid;
+      /* 親 .works の row-gap（3rem）がカード内部の行間にも効くので打ち消す */
+      row-gap: 0;
+    }
+
+    /* 画像 1 行 + 本文 6 行（メタ・見出し・概要・受賞・技術・詳細リンク） */
+    .card,
+    .card__link {
+      grid-row: span 7;
+    }
+
+    .card__body {
+      grid-row: span 6;
+    }
   }
 </style>

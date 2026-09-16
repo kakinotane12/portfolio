@@ -1,0 +1,29 @@
+---
+/**
+ * tech 名に対応するアイコンをインライン SVG で出す。
+ * CDN は使わず src/icons/ の SVG をビルド時に埋め込むので、追加リクエストは発生しない。
+ */
+import { techIcon, FALLBACK_ICON } from '../data/techIcons';
+
+interface Props {
+  name: string;
+}
+
+const { name } = Astro.props;
+
+const sources = import.meta.glob<string>('../icons/*.svg', {
+  query: '?raw',
+  import: 'default',
+  eager: true,
+});
+
+const raw = sources[`../icons/${techIcon(name)}.svg`] ?? sources[`../icons/${FALLBACK_ICON}.svg`];
+
+// 大きさは CSS 側（.tech-icon）で決めるので、SVG が持っている width/height は剥がす。
+// 名称テキストを併記しているので、アイコン自体は支援技術から隠す。
+const svg = raw
+  .replace(/\s(?:width|height)="[^"]*"/g, '')
+  .replace('<svg', '<svg aria-hidden="true" focusable="false"');
+---
+
+<span class="tech-icon" set:html={svg} />
