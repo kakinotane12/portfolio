@@ -61,7 +61,9 @@ const awardLines = (award ?? '')
       {/* 受賞・技術は中身が無くても要素は出す。カード間で行数を一定に保つため（下の subgrid 参照） */}
       <ul class="card__awards">
         {awardLines.map((line) => (
-          <li>{line}</li>
+          <li class:list={['card__award', { 'card__award--note': !line.startsWith('🏆') }]}>
+            {line}
+          </li>
         ))}
       </ul>
 
@@ -156,27 +158,41 @@ const awardLines = (award ?? '')
 
   /* summary と同じ体裁。強調は「表彰・活動」セクションが担う。
      award に改行を入れると、1行につき1項目として並ぶ */
+  /* 概要（本文）との間をはっきり空ける。ここが詰まっていると続きの文章に見える */
   .card__awards {
-    margin: 0.4rem 0 0;
+    margin: var(--space-2) 0 0;
     padding: 0;
     list-style: none;
   }
 
-  .card__awards li {
-    font-size: var(--text-base);
+  /* 受賞は本文より小さく、かつ濃くする。
+     文字量で主張するのではなく色の濃さで立たせることで、走り読みで最初に目に入る */
+  .card__award {
+    font-size: var(--text-sm);
     line-height: 1.7;
-    color: var(--text-muted);
+    font-weight: 500;
+    color: var(--text);
     text-wrap: wrap;
   }
 
-  .card__awards li + li {
+  /* 🏆 が付かない行は受賞ではなく関連活動。一段落として2段構成にする */
+  .card__award--note {
+    font-weight: 400;
+    color: var(--text-muted);
+  }
+
+  .card__award + .card__award {
     margin-top: 0.2rem;
   }
 
-  .card__tech {
+  /* 技術は付帯情報。罫線と等幅で既に分かれているので、色は一番薄い段に落とす。
+     .card__tech は子コンポーネント（TechList）が出す要素なので、
+     このコンポーネントの scope が付かない。祖先経由で :global() で届かせる */
+  .card__body :global(.card__tech) {
     margin-top: var(--space-3);
     padding-top: var(--space-2);
     border-top: 1px solid var(--border);
+    color: var(--text-faint);
   }
 
   .card__awards:not(:has(li)),

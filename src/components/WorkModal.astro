@@ -184,7 +184,8 @@ const titleId = `work-title-${key}`;
     margin-top: var(--space-2);
   }
 
-  .modal__tech {
+  /* TechList が出す要素には scope が付かないので :global() で指定する */
+  .modal__body :global(.modal__tech) {
     margin-top: var(--space-6);
   }
 

@@ -114,7 +114,8 @@ const backHref = `${localizePath('/', lang)}#works`;
     margin-top: var(--space-2);
   }
 
-  .work__tech {
+  /* TechList が出す要素には scope が付かないので :global() で指定する */
+  .work :global(.work__tech) {
     margin-top: var(--space-6);
   }
 
