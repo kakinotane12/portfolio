@@ -18,6 +18,7 @@ period: 2025年4月 – 現在
 tech:
   - MATLAB
   - Python
+  - eego™sports
 cover: /images/Aimlabs.png
 coverAlt: 研究の概要図
 youtube: ""

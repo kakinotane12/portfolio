@@ -18,7 +18,8 @@ export type TechIconName =
   | 'git-branch'
   | 'headset'
   | 'cloud'
-  | 'server';
+  | 'server'
+  | 'waveform';
 
 /** 詳細表示で行を分ける単位。表示順もこの並び */
 export const TECH_GROUPS = ['language', 'tool'] as const;
@@ -56,6 +57,9 @@ const TECH: Record<string, TechMeta> = {
   gas: { icon: 'cloud', group: 'tool' },
   render: { icon: 'server', group: 'tool' },
   latex: { icon: 'file-text', group: 'tool' },
+  'eego™sports': { icon: 'waveform', group: 'tool' },
+  eegosports: { icon: 'waveform', group: 'tool' },
+  eego: { icon: 'waveform', group: 'tool' },
   figma: { icon: 'file-text', group: 'tool' },
 };
 
