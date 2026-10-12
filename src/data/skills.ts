@@ -31,7 +31,7 @@ export const skills: SkillGroup[] = [
   {
     category: { ja: 'ツール・環境', en: 'Tools & Environment' },
     items: [
-      { name: 'Git / GitHub',usedIn: { ja: 'チーム開発・スクリプト管理', en: 'Team Development' } },
+      { name: 'Git / GitHub',usedIn: { ja: 'チーム開発・スクリプト管理', en: 'Team development & script management' } },
     ],
   },
 ];

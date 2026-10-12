@@ -76,8 +76,8 @@ const coverOf = (data: (typeof works)[number]['data']) =>
           <p class="awards__date">{entry.date[lang]}</p>
 
           <div class="awards__detail">
-            <p class="awards__org">{entry.org[lang]}</p>
-            <p class="awards__title">{entry.title[lang]}</p>
+            <p class="awards__org"><LinkedText text={entry.org[lang]} /></p>
+            {entry.title && <p class="awards__title">{entry.title[lang]}</p>}
 
             {entry.results.filter((r) => r.award).length > 0 && (
               <ul class="awards__badges">
@@ -94,7 +94,7 @@ const coverOf = (data: (typeof works)[number]['data']) =>
                 {entry.results
                   .filter((r) => !r.award)
                   .map((result) => (
-                    <li>{result.label[lang]}</li>
+                    <li><LinkedText text={result.label[lang]} /></li>
                   ))}
               </ul>
             )}

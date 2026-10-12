@@ -1,22 +1,21 @@
 ---
 lang: en
 key: exhibition-game
-title: "TODO: Title of the game exhibited at the conference"
-summary: "TODO: One line for the card."
+title: "VR Clay Shooting"
+summary: "A VR clay shooting game I built on my own"
 description: |
-  TODO: Three or four sentences on what you built — the genre, and what the player actually does.
+  A clay shooting game played on a VR headset. You fire by pulling the trigger on the right-hand controller, and you get one shot per target.
 
-  TODO: Two or three sentences on your role in the team and what you owned. Name the features you implemented and where your work began and ended.
+  It has three modes (trap, skeet and endless), and the crosshair can be shown or hidden.
+
+  I built it on my own during a two-week VR game development period in my lab. It was the first VR game I developed.
 category: Game Development
-period: Apr 2025 – Sep 2025
-role: "TODO (e.g. Programmer / team of 4)"
+period: Mar 2025
+role: "Design, implementation"
 tech:
   - Unity
   - C#
-  - Blender
-cover: /images/placeholder-1.svg
-coverAlt: Title screen of the game
-youtube: ""
+youtube: "https://youtu.be/VKFjdtbBayg"
 order: 20
 draft: false
 ---

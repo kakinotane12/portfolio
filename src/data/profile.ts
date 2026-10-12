@@ -16,19 +16,19 @@ export const profile = {
   about: {
     ja: [
       '研究と開発を中心に、ゲーム・esports関係の活動に取り組んでいます。',
-      '研究では、FPSゲームプレイヤーのエイムパフォーマンスと脳活動の関係を評価し、卒業研究と学会発表を行いました。現在も同テーマで研究活動を行っています。',
-      '開発では、チームや個人でのVRゲーム制作に取り組み、コンテストでの受賞や学会でのデモ展示を経験しました。',
+      '研究では、FPSゲームプレイヤーのエイムパフォーマンスと脳活動の関係を分析し、卒業研究と学会発表を行いました。現在も同テーマで研究を継続しています。',
+      '開発では、チームや個人でのVRゲーム制作に取り組み、コンテストへの参加や学会でのデモ展示を経験しました。',
     ],
     en: [
-      'My work centres on games and esports, mainly through academic research and game development.',
-      'My research analyses the relationship between aiming performance and brain activity in FPS players, written up as my graduation thesis and presented at an academic conference.',
-      'On the development side, I build VR games with a team — work that has won a contest award and been exhibited as a demo at an academic conference.',
+      'I work on games and esports, mainly through research and development.',
+      'In research, I analyse the relationship between aiming performance and brain activity in FPS players. I wrote this up as my graduation thesis and presented it at an academic conference, and I am continuing to research the same topic.',
+      'In development, I build VR games both in teams and on my own. This work has won a contest award and been shown as a demo at an academic conference.',
     ],
   },
 
   affiliation: {
     ja: '慶應義塾大学 理工学研究科 人間・社会システム情報科学専攻 [杉本研究室](https://im-lab.net/) 修士1年',
-    en: 'M1 Student,Interactive Media Lab, School of Informatics, Management, and Human Sciences, Graduate School of Science and Technology, Keio University',
+    en: 'First-year master’s student, [Interactive Media Lab (Sugimoto Lab)](https://im-lab.net/), School of Informatics, Management, and Human Sciences, Graduate School of Science and Technology, Keio University',
   },
 
   /** TODO: 公開してよい連絡用メールアドレスに差し替えてください */
