@@ -6,7 +6,7 @@ export const ui = {
     'nav.works': 'Works',
     'nav.awards': 'Awards',
     'nav.skills': 'Skills',
-    'nav.contact': 'Contact',
+    'nav.links': 'Links',
     'nav.skipToContent': '本文へスキップ',
     'nav.menu': 'メニュー',
 
@@ -18,8 +18,8 @@ export const ui = {
     'section.awards.lead': '表彰・活動',
     'section.skills': 'Skills',
     'section.skills.lead': '技術スタック',
-    'section.contact': 'Contact',
-    'section.contact.lead': 'お問い合わせ',
+    'section.links': 'Links',
+    'section.links.lead': 'リンク',
 
     'works.detail': '詳細を見る',
     'works.back': '制作物一覧へ戻る',
@@ -28,7 +28,7 @@ export const ui = {
     'tech.tool': 'ツール',
 
     'contact.email': 'メール',
-    'contact.github': 'GitHub',
+    'links.github': 'GitHub',
 
     'modal.close': '閉じる',
 
@@ -43,7 +43,7 @@ export const ui = {
     'nav.works': 'Works',
     'nav.awards': 'Awards',
     'nav.skills': 'Skills',
-    'nav.contact': 'Contact',
+    'nav.links': 'Links',
     'nav.skipToContent': 'Skip to content',
     'nav.menu': 'Menu',
 
@@ -55,8 +55,8 @@ export const ui = {
     'section.awards.lead': 'Awards & activities',
     'section.skills': 'Skills',
     'section.skills.lead': 'Tools & technologies',
-    'section.contact': 'Contact',
-    'section.contact.lead': 'Get in touch',
+    'section.links': 'Links',
+    'section.links.lead': 'Elsewhere',
 
     'works.detail': 'View details',
     'works.back': 'Back to all projects',
@@ -65,7 +65,7 @@ export const ui = {
     'tech.tool': 'Tools',
 
     'contact.email': 'Email',
-    'contact.github': 'GitHub',
+    'links.github': 'GitHub',
 
     'modal.close': 'Close',
 

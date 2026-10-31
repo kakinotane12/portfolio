@@ -163,22 +163,14 @@ const coverOf = (data: (typeof works)[number]['data']) =>
   </div>
 </Section>
 
-{/* ============ Contact ============ */}
-<Section id="contact" eyebrow={t('section.contact')} title={t('section.contact.lead')} prose>
-  <div class="contact reveal">
-
-    <ul class="contact__list">
+{/* ============ Links ============ */}
+<Section id="links" eyebrow={t('section.links')} title={t('section.links.lead')} prose>
+  <div class="links reveal">
+    <ul class="links__list">
       <li>
-        <a class="contact__link" href={`mailto:${profile.email}`}>
-          <span class="contact__label">{t('contact.email')}</span>
-          <span class="contact__value">{profile.email}</span>
-          <ArrowIcon size="1rem" />
-        </a>
-      </li>
-      <li>
-        <a class="contact__link" href={githubUrl} rel="me noopener" target="_blank">
-          <span class="contact__label">{t('contact.github')}</span>
-          <span class="contact__value">@{profile.githubUser}</span>
+        <a class="links__link" href={githubUrl} rel="me noopener" target="_blank">
+          <span class="links__label">{t('links.github')}</span>
+          <span class="links__value">@{profile.githubUser}</span>
           <ArrowIcon size="1rem" />
         </a>
       </li>
@@ -385,19 +377,15 @@ const coverOf = (data: (typeof works)[number]['data']) =>
     color: var(--text-faint);
   }
 
-  /* ---------- Contact ---------- */
-  .contact__lead {
-    color: var(--text-muted);
-  }
-
-  .contact__list {
+  /* ---------- Links ---------- */
+  .links__list {
     margin: var(--space-4) 0 0;
     padding: 0;
     list-style: none;
     border-top: 1px solid var(--border);
   }
 
-  .contact__link {
+  .links__link {
     display: flex;
     align-items: center;
     gap: var(--space-2);
@@ -406,11 +394,11 @@ const coverOf = (data: (typeof works)[number]['data']) =>
     transition: color 0.15s var(--ease);
   }
 
-  .contact__link:hover {
+  .links__link:hover {
     color: var(--accent);
   }
 
-  .contact__label {
+  .links__label {
     min-width: 7rem;
     font-size: var(--text-xs);
     letter-spacing: 0.1em;
@@ -418,7 +406,7 @@ const coverOf = (data: (typeof works)[number]['data']) =>
     color: var(--text-faint);
   }
 
-  .contact__value {
+  .links__value {
     flex: 1;
     font-weight: 500;
     word-break: break-all;
