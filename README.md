@@ -1,42 +1,39 @@
 # Portfolio
 
-四宮依歩稀のポートフォリオサイト。
+四宮依歩稀のポートフォリオサイトです。研究活動とゲーム開発の制作物をまとめています。
 
-- 公開URL: https://kakinotane12.github.io/portfolio/
-- 日本語 `/` ・ 英語 `/en/` の2言語
-- 1ページ完結。制作物はカードをクリックするとポップアップで開く
-- Astro（静的サイトジェネレーター）で構築し、GitHub Pages に自動公開
+**https://kakinotane12.github.io/portfolio/**
 
-## 動かす
+## 特徴
 
-```bash
-npm install     # 最初の1回だけ
-npm run dev     # http://localhost:4321/portfolio/ で確認（保存すると自動反映）
+- **日英2言語**：日本語は `/`、英語は `/en/`。各ページに `hreflang` を出力
+- **1ページ完結＋作品ごとのURL**：制作物はカードからモーダルで開き、URL も `/works/<作品>/` に切り替わる。ブラウザの「戻る」で閉じられ、URL を共有すれば単独ページとして開ける
+- **JavaScript なしでも閲覧可能**：カードは通常のリンクで、作品ごとの単独ページも静的に生成。検索エンジンからも読める
+- **動画の遅延読み込み**：YouTube は最初サムネイルだけを表示し、クリック時に埋め込む。モーダルを閉じると再生を止める
+- **ダークモード**：OS の設定に従うほか、手動切り替えも可能。描画前にテーマを適用し、ちらつきを防止
+- **データと見た目の分離**：プロフィール・受賞歴・技術スタックは `src/data/`、制作物は Markdown（Content Collections）で管理
+
+## 技術
+
+- [Astro](https://astro.build/) 5（静的サイト生成）／TypeScript
+- GitHub Actions で GitHub Pages にデプロイ
+
+## 構成
+
+```
+src/
+  pages/        ルーティング（トップ・作品の単独ページ・404。英語版は en/ 以下）
+  layouts/      全ページ共通の head・OGP・テーマ適用
+  components/   ヘッダー、作品カード、モーダル、動画埋め込みなどの部品
+  content/      制作物（Markdown、日英）
+  data/         プロフィール・受賞歴・技術スタック
+  i18n/         言語設定と固定文言
+  styles/       デザイントークンと全体のスタイル
 ```
 
-## 編集する
-
-**→ [GUIDE.md](GUIDE.md) に、仕組みの説明と編集手順をまとめています。**
-
-急ぎのときはこの表だけで足ります。
-
-| やりたいこと | 開くファイル |
-| --- | --- |
-| 氏名・所属・自己紹介・連絡先 | [src/data/profile.ts](src/data/profile.ts) |
-| 受賞・学会発表・展示 | [src/data/awards.ts](src/data/awards.ts) |
-| 技術スタック | [src/data/skills.ts](src/data/skills.ts) |
-| 制作物（1作品＝日英2ファイル） | [src/content/works/](src/content/works/) |
-| 画像 | [public/images/](public/images/) |
-| 色・文字サイズ・余白 | [src/styles/global.css](src/styles/global.css) の冒頭60行 |
-| 固定文言（「詳細を見る」など） | [src/i18n/ui.ts](src/i18n/ui.ts) |
-
-## 公開する
-
-`main` に push すると GitHub Actions が自動でビルド・公開します。
-初回のみ Settings → Pages → Source を GitHub Actions に設定してください。
+## ローカルで動かす
 
 ```bash
-git add -A
-git commit -m "内容を更新"
-git push
+npm install
+npm run dev     # http://localhost:4321/portfolio/
 ```
