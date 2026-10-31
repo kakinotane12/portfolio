@@ -1,6 +1,5 @@
 /**
  * サイト全体の基本情報。
- * TODO: と書かれた箇所を実データに差し替えてください。
  */
 export const profile = {
   name: { ja: '四宮 依歩稀', en: 'Ibuki Shinomiya' },
@@ -21,17 +20,16 @@ export const profile = {
     ],
     en: [
       'I work on games and esports, mainly through research and development.',
-      'In research, I analyse the relationship between aiming performance and brain activity in FPS players. I wrote this up as my graduation thesis and presented it at an academic conference, and I am continuing to research the same topic.',
+      'In research, I analyze the relationship between aiming performance and brain activity in FPS players. I wrote this up as my graduation thesis and presented it at an academic conference, and I am continuing to research the same topic.',
       'In development, I build VR games both in teams and on my own. This work has won a contest award and been shown as a demo at an academic conference.',
     ],
   },
 
   affiliation: {
     ja: '慶應義塾大学 理工学研究科 人間・社会システム情報科学専攻 [杉本研究室](https://im-lab.net/) 修士1年',
-    en: 'First-year master’s student, [Interactive Media Lab (Sugimoto Lab)](https://im-lab.net/), School of Informatics, Management, and Human Sciences, Graduate School of Science and Technology, Keio University',
+    en: 'First-year master’s student, [InteractiveMediaLab](https://im-lab.net/), School of Informatics, Management, and Human Sciences, Graduate School of Science and Technology, Keio University',
   },
 
-  /** TODO: 公開してよい連絡用メールアドレスに差し替えてください */
   email: 'shinomiya403812@gmail.com',
   githubUser: 'kakinotane12',
 } as const;

@@ -8,7 +8,7 @@ description: |
 
   It has three modes (trap, skeet and endless), and the crosshair can be shown or hidden.
 
-  I built it on my own during a two-week VR game development period in my lab. It was the first VR game I developed.
+  I built it on my own during a two-week VR game development sprint in my lab. It was the first VR game I developed.
 category: Game Development
 period: Mar 2025
 role: "Design, implementation"

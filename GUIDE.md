@@ -269,7 +269,6 @@ role: "プログラマ: 4名チーム"    # ○ ダブルクォートで囲む
 
 - `og.png` … SNSでシェアされたときに出る画像。**1200×630 の氏名入り画像** への差し替え推奨
 - `favicon.svg` … ブラウザのタブに出る小さなアイコン（`public/` 直下）
-- `placeholder-*.svg` … 仮画像。実物ができたら差し替える
 
 画像は **表示サイズの2倍程度まで** に縮めてから置いてください。
 数MBの写真をそのまま置くと表示が遅くなります（カードは横800px程度で十分）。
@@ -508,12 +507,12 @@ git push
 
 ## 11. 残っているTODO
 
-- [ ] `profile.ts` のメールアドレス（現在 `TODO@example.com`。就活用のアドレスを推奨）
+- [x] `profile.ts` のメールアドレス
 - [x] `src/content/works/en/*.md` 3件の英訳（現在プレースホルダ）
 - [x] `profile.ts` の `affiliation.en` の誤記（`M1 Student,Interactive` にスペースがない）と研究室リンク
 - [ ] `src/content/works/ja/research-project.md` の中身
 - [ ] `public/images/og.png` を氏名入り 1200×630 の画像に差し替え
-- [ ] `public/images/vr-clay-shooting-title.jpg` は YouTube に切り替えたため未使用（削除可）
-- [ ] `contest-game.md` の `description` 最終段落の受賞記述が `award` 項目と重複
+- [x] 未使用画像（`vr-clay-shooting-title.jpg`・`placeholder-*.svg`）の削除
+- [x] `contest-game.md` の `description` 最終段落の受賞記述が `award` 項目と重複
 - [ ] アクセントカラーの最終決定（現在は暫定の青 `#2563eb`）
 - [ ] GitHub の Settings → Pages → Source を「GitHub Actions」に設定

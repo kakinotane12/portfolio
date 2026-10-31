@@ -19,7 +19,7 @@ export const skills: SkillGroup[] = [
       { name: 'MATLAB',usedIn: { ja: '研究・データ分析', en: 'Research & analysis' }  },
       { name: 'Python', usedIn: { ja: '研究・データ分析', en: 'Research & analysis' } },
       { name: 'C#', usedIn: { ja: 'ゲーム開発', en: 'Game development' } },
-      { name: 'C / C++' },
+      { name: 'C / C++', usedIn: { ja: '学習中', en: 'Currently learning' } },
     ],
   },
   {

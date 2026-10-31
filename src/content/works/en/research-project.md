@@ -1,8 +1,8 @@
 ---
 lang: en
 key: research-project
-title: "Analysing Brain Activity in FPS Players"
-summary: "My research at university"
+title: "Analyzing Brain Activity in FPS Players"
+summary: "An EEG study of how aiming skill relates to brain activity in FPS players"
 award: |
   🏆Outstanding Graduation Thesis Award
   Poster presentation at the Japanese Psychological Association

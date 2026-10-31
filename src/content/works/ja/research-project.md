@@ -2,7 +2,7 @@
 lang: ja
 key: research-project
 title: "FPSプレイヤーの脳活動の分析"
-summary: "大学における研究活動"
+summary: "FPSのエイム能力と脳活動の関係を脳波で分析する研究"
 award: |
   🏆優秀卒業論文賞
   ポスター発表 ＠日本心理学会

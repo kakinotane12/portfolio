@@ -29,7 +29,7 @@ export const awards: AwardEntry[] = [
       ja: '[全国学生VRサークル活動報告大会 & XR制作物プレゼン 2026](https://www.youtube.com/watch?v=nz3gcGCO-Fg&t=12074s)',
       en: '[National Student VR Circle Activity Report & XR Work Presentations 2026](https://www.youtube.com/watch?v=nz3gcGCO-Fg&t=12074s)',
     },
-    results: [{ label: { ja: 'XR制作物としてEntrust(X) を紹介', en: '1-minute presentation of Entrust(X)' } }],
+    results: [{ label: { ja: 'XR制作物としてEntrust(X)を紹介', en: 'Presented Entrust(X) as an XR work' } }],
   },
   {
     date: { ja: '2026年9月', en: 'Sep 2026' },

@@ -23,12 +23,9 @@ export const ui = {
 
     'works.detail': '詳細を見る',
     'works.back': '制作物一覧へ戻る',
-    'works.role': '担当',
     'works.videoLoad': '動画を再生（YouTube を読み込みます）',
     'tech.language': '言語',
     'tech.tool': 'ツール',
-
-    'awards.note': '受賞・学会発表・展示',
 
     'contact.email': 'メール',
     'contact.github': 'GitHub',
@@ -63,14 +60,10 @@ export const ui = {
 
     'works.detail': 'View details',
     'works.back': 'Back to all projects',
-    'works.role': 'Role',
     'works.videoLoad': 'Play video (loads YouTube)',
     'tech.language': 'Languages',
     'tech.tool': 'Tools',
 
-    'awards.note': 'Awards, presentations and exhibitions',
-
-    'contact.lead': 'Feel free to reach out by email or through GitHub.',
     'contact.email': 'Email',
     'contact.github': 'GitHub',
 
