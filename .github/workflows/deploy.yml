@@ -2,8 +2,8 @@ name: Deploy to GitHub Pages
 
 on:
   #公開までpushしてもbuild & deployしない
-  #push:
-  #  branches: [main]
+  push:
+    branches: [main]
   # Actions タブから手動実行もできるようにしておく
   workflow_dispatch:
 
